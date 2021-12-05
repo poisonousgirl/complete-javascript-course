@@ -9,7 +9,6 @@ const calcAverage = (array) => {
     let sum = array.reduce(function(a, b) {
         return a + b;
     }, 0);
-    // console.log(`${sum} summ of calc1`)
     return sum / array.length;
 };
 
@@ -101,7 +100,6 @@ const calcAverage2 = (arr) => {
     for (let i = 0; i < arr.length; i++) {
         sum += arr[i];
     };
-    // console.log(`${sum} summ of calc2`)
     return sum / arr.length;
 };
 
