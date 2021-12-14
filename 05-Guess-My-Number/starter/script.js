@@ -5,7 +5,7 @@ const againButton = document.querySelector('.again');
 let checkButton = document.querySelector('.check');
 let message = document.querySelector('.message');
 let score = document.querySelector('.score');
-const highScore = document.querySelector('.highscore');
+let highScore = document.querySelector('.highscore');
 let number = document.querySelector('.number');
 const body = document.querySelector('body');
 
@@ -16,6 +16,7 @@ const randomNumberGenerator = (min, max) => {
   return Math.floor(result);
 };
 let scoreNumber = 20;
+let highscoreNumber = 0;
 let randomNumber = randomNumberGenerator(1, 20);
 // number.textContent = randomNumber;
 
@@ -30,20 +31,17 @@ checkButton.addEventListener('click', function () {
     body.style.backgroundColor = '#60b347';
     number.style.width = '30rem';
     number.textContent = randomNumber;
-  } else if (inputV < randomNumber) {
-    if (scoreNumber > 1) {
-      scoreNumber--;
-      score.textContent = scoreNumber;
-      message.textContent = 'Too low';
-    } else {
-      message.textContent = 'You lost';
-      score.textContent = 0;
+    checkButton.disabled = true;
+
+    if (scoreNumber > highscoreNumber) {
+      highscoreNumber = scoreNumber;
+      highScore.textContent = highscoreNumber;
     }
-  } else if (inputV > randomNumber) {
+  } else if (inputV !== randomNumber) {
     if (scoreNumber > 1) {
+      message.textContent = inputV > randomNumber ? 'Too high' : 'Too low';
       scoreNumber--;
       score.textContent = scoreNumber;
-      message.textContent = 'Too high';
     } else {
       message.textContent = 'You lost';
       score.textContent = 0;
@@ -60,4 +58,5 @@ againButton.addEventListener('click', function () {
   number.style.width = '15rem';
   input.value = '';
   randomNumber = randomNumberGenerator(1, 20);
+  checkButton.disabled = false;
 });
